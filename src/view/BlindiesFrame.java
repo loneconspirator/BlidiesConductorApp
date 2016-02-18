@@ -216,7 +216,7 @@ public class BlindiesFrame extends JFrame{
 	
 	public void targetEditClicked() {
 		try {
-			blindies.setTarget(hostField.getText(), Integer.parseInt(hostField.getText()));
+			blindies.setTarget(hostField.getText(), Integer.parseInt(portField.getText()));
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(this, "There was a problem with the host you provided, please try another.");
