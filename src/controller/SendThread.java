@@ -15,10 +15,9 @@ public class SendThread extends Thread {
 	public void run() {
 		while (true) {
 			try {
-				sleep(50);
+				sleep(10);
 				if (go) blindies.send();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
