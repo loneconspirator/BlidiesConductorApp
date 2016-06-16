@@ -16,6 +16,8 @@ import javax.swing.plaf.metal.MetalComboBoxUI;
 import javax.swing.border.TitledBorder; 
 import javax.swing.UIManager.*;
 
+import view.components.BlindiesSlider;
+
 public class BlindiesTabletFrame extends JFrame{
 	private static final long serialVersionUID = -2139229150850736977L;
 
@@ -133,6 +135,7 @@ public class BlindiesTabletFrame extends JFrame{
         // ------ slider 1 panel components
         slider1Panel = new JPanel();
         slider1 = new JSlider(JSlider.HORIZONTAL, 0, 255, 0);
+        slider1.setUI(new BlindiesSlider(slider1));
         spinner1 = new JSpinner(new SpinnerNumberModel(0, 0, 255, 1));
         slider1DownButton = new JButton();
         slider1UpButton = new JButton();
@@ -155,6 +158,7 @@ public class BlindiesTabletFrame extends JFrame{
         // ------ slider 2 panel components
         slider2Panel = new JPanel();
         slider2 = new JSlider(JSlider.HORIZONTAL, 0, 255, 0);
+        slider2.setUI(new BlindiesSlider(slider2));
         spinner2 = new JSpinner(new SpinnerNumberModel(0, 0, 255, 1));
         slider2DownButton = new JButton();
         slider2UpButton = new JButton();
@@ -177,6 +181,7 @@ public class BlindiesTabletFrame extends JFrame{
         // ------ slider 3 panel components
         slider3Panel = new JPanel();
         slider3 = new JSlider(JSlider.HORIZONTAL, 0, 255, 0);
+        slider3.setUI(new BlindiesSlider(slider3));
         spinner3 = new JSpinner(new SpinnerNumberModel(0, 0, 255, 1));
         slider3DownButton = new JButton();
         slider3UpButton = new JButton();
