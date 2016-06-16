@@ -1,14 +1,17 @@
 package controller;
+
 import java.io.IOException;
+
+import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
 import enums.PatternMode;
 import enums.SendType;
-import view.BlindiesFrame;
+import view.BlindiesTabletFrame;
 
 public class Blindies {
-	BlindiesFrame frame;
+	BlindiesTabletFrame frame;
 	UdpDriver udp;
 	
 	private SendThread sender;
@@ -27,7 +30,7 @@ public class Blindies {
 		this.port = port;
 		udp = new UdpDriver();
 		udp.setupTarget(host, port);
-		frame = new BlindiesFrame(this);
+		frame = new BlindiesTabletFrame(this);
         frame.setVisible(true);
         sender = new SendThread(this);
         sender.start();
@@ -62,7 +65,19 @@ public class Blindies {
 		this.port = port;
 		udp.setupTarget(host, port);
 	}
-		
+
+	// IP Helper
+	private static String getLocalBroadcastIP() {
+		try {
+		    return InetAddress.getLocalHost()
+		                      .getHostAddress()
+		                      .replaceFirst("\\d+$", "255");
+		}
+		catch (Exception e) {
+			return "192.168.1.255";
+		}
+    }
+
 	public void setSendType(SendType sendType) {
 		if (this.sendType == SendType.CONTINUOUS)
 			sender.setGo(false);
@@ -71,7 +86,9 @@ public class Blindies {
 			sender.setGo(true);
 	}
 	public void sendClicked() throws IOException {
-        System.out.printf("Sending: %c - %d %d %d ...", mode.getCommandValue(), value1, value2, value3);
+		String formattedOutput = String.format("Sending: %c - %d %d %d ...", mode.getCommandValue(), value1, value2, value3);
+        System.out.printf(formattedOutput);
+        frame.appendMessage(formattedOutput);
 		udp.sendCommand(new byte[]{(byte) mode.getCommandValue(), (byte) value1, (byte) value2, (byte) value3});
 	}
 	
@@ -83,10 +100,10 @@ public class Blindies {
 	public void send() {
 		frame.clickSendButton();
 	}
-	
+
 	// main
 	public static void main(String[] args) throws Exception {
-		String host = "192.168.1.255";
+		String host = getLocalBroadcastIP();
 		int port = 2390;
 		if (args.length == 2) {
 			host = args[0];

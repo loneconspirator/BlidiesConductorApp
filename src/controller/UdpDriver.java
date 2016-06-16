@@ -28,7 +28,7 @@ public class UdpDriver {
         	throw new IllegalArgumentException("port must be greater than 0");
        	this.port = port;
         this.host = host;
-        System.out.printf("Now sent to send to %s:%d\n", host, port);
+        System.out.printf("Now set to send to %s:%d\n", host, port);
     }
     
     public void sendCommand(byte[] sendData) throws IOException
