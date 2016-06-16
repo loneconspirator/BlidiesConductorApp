@@ -314,6 +314,16 @@ public class BlindiesTabletFrame extends JFrame{
         		slider2MaxButton.getFont().getSize()+6));
         slider2MaxButton.setText("max");
 
+        sendButtonLeft.setFont(
+        	sendButtonLeft.getFont().deriveFont(
+        		sendButtonLeft.getFont().getStyle() | java.awt.Font.BOLD, 
+        		sendButtonLeft.getFont().getSize()+50));
+
+        sendButtonRight.setFont(
+        	sendButtonRight.getFont().deriveFont(
+        		sendButtonRight.getFont().getStyle() | java.awt.Font.BOLD, 
+        		sendButtonRight.getFont().getSize()+50));
+
 		// -- slider 3
 		// ---- panel
 		slider3Title = BorderFactory.createTitledBorder(
