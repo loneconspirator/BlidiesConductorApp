@@ -468,7 +468,7 @@ public class BlindiesTabletFrame extends JFrame{
  
 	// Event handlers
 	public void clickSendButton() {
-		sendButton.doClick();
+		sendClicked();
 	}
 	
 	public void setSendType(SendType sendType) {
@@ -477,6 +477,11 @@ public class BlindiesTabletFrame extends JFrame{
 	
 	// Message box appender
 	public void appendMessage(String string) {
+		// avoid the message count getting out of control
+		if (this.messageCount > 4000000) {
+		    this.messageCount = 0;
+		}
+
 	    this.messageCount++;
 	    String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 	    

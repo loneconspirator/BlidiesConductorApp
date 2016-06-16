@@ -79,16 +79,22 @@ public class Blindies {
     }
 
 	public void setSendType(SendType sendType) {
-		if (this.sendType == SendType.CONTINUOUS)
+		if (this.sendType == SendType.CONTINUOUS) {
+			frame.appendMessage("Continuous mode OFF -- enabling message output");
 			sender.setGo(false);
+		}
 		this.sendType = sendType;
-		if (this.sendType == SendType.CONTINUOUS)
+		if (this.sendType == SendType.CONTINUOUS) {
+			frame.appendMessage("Continuous mode ON -- suppressing message output");
 			sender.setGo(true);
+		}
 	}
 	public void sendClicked() throws IOException {
-		String formattedOutput = String.format("Sending: %c - %d %d %d ...", mode.getCommandValue(), value1, value2, value3);
-        System.out.printf(formattedOutput);
-        frame.appendMessage(formattedOutput);
+		if (this.sendType != SendType.CONTINUOUS) {
+			String formattedOutput = String.format("Sending: %c - %d %d %d ...", mode.getCommandValue(), value1, value2, value3);
+			System.out.printf(formattedOutput);
+			frame.appendMessage(formattedOutput);
+		}
 		udp.sendCommand(new byte[]{(byte) mode.getCommandValue(), (byte) value1, (byte) value2, (byte) value3});
 	}
 	
