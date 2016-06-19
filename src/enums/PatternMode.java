@@ -30,4 +30,8 @@ public enum PatternMode {
     public String arg3() { if(args.length >= 3) return args[2]; else return null; }
     
     public String toString() { return label; }
+
+    public static PatternMode getDefault() {
+        return BLACK;
+    }
 }
